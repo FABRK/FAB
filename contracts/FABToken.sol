@@ -18,7 +18,7 @@ contract FABToken is StandardToken, DetailedERC20, Ownable, PausableToken{
     balances[msg.sender] = totalSupply_;
   }
 
-  function register(string _fabAddress) public returns (bool) {
+  function register(string _fabAddress) public whenNotPaused returns (bool) {
     keys[msg.sender] = _fabAddress; // set FAB address
   }
 }

@@ -45,7 +45,7 @@ contract('FABToken', async(accounts) => {
             for (let i = 0; i < testRecords; i++) {
                 let x = await this
                     .token
-                    .keys[accounts[i]]
+                    .keys(accounts[i])
 
                 fs.appendFileSync(`${process.env.PWD}/test-output/retrive.txt`, x + "    " + accounts[i] + "\n");
             }

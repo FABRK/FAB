@@ -7,7 +7,6 @@ require('chai')
     .should();
 
 contract('FABToken', async (accounts) => {
-
     const _name = 'Fab Token';
     const _symbol = 'FAB';
     const _decimals = 18;
@@ -16,16 +15,12 @@ contract('FABToken', async (accounts) => {
     const owner = accounts[0];
     const fabCustomer1 = accounts[1];
     const fabCustomer2 = accounts[2];
-
+    const fabCustomer3 = accounts[3];
 
     beforeEach(async function () {
-
-
     });
 
     describe('token attributes', async function () {
-
-
         it('Deploy', async function () {
             this.token = await FABToken.new(_name, _symbol, _decimals);
         });
@@ -72,6 +67,76 @@ contract('FABToken', async (accounts) => {
                 const balance = await this.token.balanceOf(fabCustomer2);
                 balance.should.be.bignumber.equal(0);
             }
+        });
+
+        it('Pause/Stop all transactions ', async function () {
+            await this
+                .token
+                .pause();
+            const paused = await this
+                .token
+                .paused();
+            paused
+                .should
+                .equal(true);
+        });
+
+        it('Owner tries to transfer 10 token  to customer 2 , he fails to do so , As all tx ' +
+            'are paused  ',
+            async function () {
+                try {
+                    await this
+                        .token
+                        .transfer(fabCustomer2, 10, { from: owner });
+                } catch (e) {
+                    const balance = await this
+                        .token
+                        .balanceOf(fabCustomer2);
+                    balance
+                        .should
+                        .be
+                        .bignumber
+                        .equal(0);
+                }
+            });
+
+        it('Someone tries to register,he fails to do so , As all tx are paused', async function () {
+            try {
+                await this
+                    .token
+                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer3 });
+            } catch (e) {
+            }
+            let x = await this
+                .token
+                .keys(fabCustomer3)
+            x.should.equal('')
+        });
+
+        it('Resume all transactions ', async function () {
+            await this
+                .token
+                .unpause();
+            const paused = await this
+                .token
+                .paused();
+            paused
+                .should
+                .equal(false);
+        });
+
+        it('Someone tries to register,succeed now after resuming , As all tx are resumed', async function () {
+            try {
+                await this
+                    .token
+                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer3 });
+            } catch (e) {
+            }
+
+            let x = await this
+                .token
+                .keys(fabCustomer3)
+            x.should.equal("fabxxxxyyyycccccFABARREss")
         });
     });
 });
