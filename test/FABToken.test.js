@@ -59,7 +59,7 @@ contract('FABToken', async (accounts) => {
             let x = _totalSupply - 100;
             balance.should.be.bignumber.equal(x);
         });
-
+        
         it('Customer 1 tries to transfer more token than his balance to customer 2 , he fails to do so', async function () {
             try {
                 await this.token.transfer(fabCustomer2, 101, {from: fabCustomer1});
@@ -67,6 +67,19 @@ contract('FABToken', async (accounts) => {
                 const balance = await this.token.balanceOf(fabCustomer2);
                 balance.should.be.bignumber.equal(0);
             }
+        });
+
+        it('Someone tries to register,he fails to do so, as balance is 0', async function () {
+            try {
+                await this
+                    .token
+                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer2 });
+            } catch (e) {
+            }
+            let x = await this
+                .token
+                .keys(fabCustomer2)
+            x.should.equal('')
         });
 
         it('Pause/Stop all transactions ', async function () {
@@ -104,7 +117,7 @@ contract('FABToken', async (accounts) => {
             try {
                 await this
                     .token
-                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer3 });
+                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer1 });
             } catch (e) {
             }
             let x = await this
@@ -129,13 +142,13 @@ contract('FABToken', async (accounts) => {
             try {
                 await this
                     .token
-                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer3 });
+                    .register("fabxxxxyyyycccccFABARREss", { from: fabCustomer1 });
             } catch (e) {
             }
 
             let x = await this
                 .token
-                .keys(fabCustomer3)
+                .keys(fabCustomer1)
             x.should.equal("fabxxxxyyyycccccFABARREss")
         });
     });

@@ -9,6 +9,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract FABToken is StandardToken, DetailedERC20, Ownable, PausableToken{
   mapping(address => string) public keys;
+  event LogRegister(address user, string key);
 
   constructor(string _name, string _symbol, uint8 _decimals)
     DetailedERC20(_name, _symbol, _decimals)
@@ -19,6 +20,8 @@ contract FABToken is StandardToken, DetailedERC20, Ownable, PausableToken{
   }
 
   function register(string _fabAddress) public whenNotPaused returns (bool) {
+    require(balances[msg.sender] > 0, "Balance must be > 0");
     keys[msg.sender] = _fabAddress; // set FAB address
+    emit LogRegister(msg.sender, key);
   }
 }

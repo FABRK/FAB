@@ -25,6 +25,12 @@ contract('FABToken', async(accounts) => {
             this.token = await FABToken.new(_name, _symbol, _decimals);
         });
 
+        it('Owner transfer 100 tokens to all addresses', async function () {
+            for (let i = 0; i < accounts.length; i++) {
+                const status = await this.token.transfer(accounts[i], 100);
+            }
+        });
+        
         it('Register 999 addresses', async function () {
             if (fs.existsSync(`${process.env.PWD}/test-output/register.txt`)) {
                 fs.unlinkSync(`${process.env.PWD}/test-output/register.txt`);
@@ -37,7 +43,7 @@ contract('FABToken', async(accounts) => {
             }
         });
 
-        it('Retrive 1 million', async function () {
+        it('Retrieve 999 addresses', async function () {
 
             if (fs.existsSync(`${process.env.PWD}/test-output/retrive.txt`)) {
                 fs.unlinkSync(`${process.env.PWD}/test-output/retrive.txt`);
