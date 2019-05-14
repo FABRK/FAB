@@ -126,6 +126,22 @@ contract('FABToken', async (accounts) => {
             x.should.equal('')
         });
 
+        it('Someone tries to claim,he fails to do so , As all tx are paused and they have not registered', async function () {
+            try {
+                await this
+                    .token
+                    .claim({ from: fabCustomer1 });
+            } catch (e) {
+            }
+            const balance = await this
+                .token
+                .balanceOf(fabCustomer1);
+            balance.should
+                .be
+                .bignumber
+                .equal(100);
+        });
+
         it('Resume all transactions ', async function () {
             await this
                 .token
@@ -136,6 +152,22 @@ contract('FABToken', async (accounts) => {
             paused
                 .should
                 .equal(false);
+        });
+
+        it('Someone tries to claim,he fails to do so , As they have not registered', async function () {
+            try {
+                await this
+                    .token
+                    .claim({ from: fabCustomer1 });
+            } catch (e) {
+            }
+            const balance = await this
+                .token
+                .balanceOf(fabCustomer1);
+            balance.should
+                .be
+                .bignumber
+                .equal(100);
         });
 
         it('Someone tries to register,succeed now after resuming , As all tx are resumed', async function () {
@@ -150,6 +182,22 @@ contract('FABToken', async (accounts) => {
                 .token
                 .keys(fabCustomer1)
             x.should.equal("fabxxxxyyyycccccFABARREss")
+        });
+
+        it('Someone tries to claim, and it succeeds emitting an event and burning their token balance', async function () {
+            try {
+                await this
+                    .token
+                    .claim({ from: fabCustomer1 });
+            } catch (e) {
+            }
+            const balance = await this
+                .token
+                .balanceOf(fabCustomer1);
+            balance.should
+                .be
+                .bignumber
+                .equal(0);
         });
     });
 });
