@@ -11,7 +11,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 contract FABToken is StandardToken, DetailedERC20, Ownable, PausableToken, BurnableToken{
   mapping(address => string) public keys;
   event LogRegister(address user, string key);
-  event ClaimEvent(address indexed claimer, string fabAddress, uint256 tokenCount);
+  event LogClaim(address indexed claimer, string fabAddress, uint256 tokenCount);
 
   constructor(string _name, string _symbol, uint8 _decimals)
     DetailedERC20(_name, _symbol, _decimals)
@@ -34,7 +34,7 @@ contract FABToken is StandardToken, DetailedERC20, Ownable, PausableToken, Burna
 
     uint256 balance = balances[msg.sender];
     burn(balance);
-    emit ClaimEvent(msg.sender, keys[msg.sender], balance);
+    emit LogClaim(msg.sender, keys[msg.sender], balance);
     return true;
   }
 }
