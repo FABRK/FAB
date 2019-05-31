@@ -8,10 +8,11 @@ Install:
 
 Steps to run:
 
-    Open terminal , run ganache-cli
+    Open terminal , run "ganache-cli -a 1000"
     Open another terminal, cd <fab directory>
     npm install
     truffle compile
+    mkdir test-output
     truffle test
 
 All test cases should pass
