@@ -1,4 +1,4 @@
-pragma solidity 0.4.25;
+pragma solidity 0.5.8;
 
 import "openzeppelin-solidity/contracts/token/ERC20/TokenTimelock.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
@@ -10,10 +10,10 @@ import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
  * was done.
  */
 contract FABTokenTimelock is TokenTimelock{
-  using SafeERC20 for ERC20Basic;
+  using SafeERC20 for IERC20;
   event LogTimelock(address sender, address beneficiary, uint256 releaseTime);
 
-  constructor(ERC20Basic _token, address _beneficiary, uint _releaseTime)
+  constructor(IERC20 _token, address _beneficiary, uint _releaseTime)
     TokenTimelock(_token, _beneficiary, _releaseTime)
     public
   {

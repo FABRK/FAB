@@ -17,7 +17,6 @@ contract('FABToken', async (accounts) => {
     const owner = accounts[0];
     const fabCustomer1 = accounts[1];
     const fabCustomer2 = accounts[2];
-    const fabCustomer3 = accounts[3];
     const exchangeAddress = accounts[4];
 
     beforeEach(async function () {
@@ -37,23 +36,22 @@ contract('FABToken', async (accounts) => {
 
         it('Total Supply is 55 billion', async function () {
             const totalSupply = await this.token.totalSupply();
-            totalSupply.should.be.bignumber.equal(_totalSupply);
+            totalSupply.toString().should.equal(`${_totalSupply}`);
         });
 
         it('Owner has 80% of 55 billion balance , i.e total supply', async function () {
             const balanceOfOwner = await this.token.balanceOf(owner);
-            balanceOfOwner.should.be.bignumber.equal(_totalSupply * 80 / 100);
+            balanceOfOwner.toString().should.equal(`${_totalSupply * 80 / 100}`);
         });
 
         it('Owner locks up all his coins in the Timelock contract, his balance should be 0, timelock contract should own 80% of coins', async function () {
             let balanceOfOwner = await this.token.balanceOf(owner);
             await this.token.transfer(this.timelock_contract.address, balanceOfOwner);
             balanceOfOwner = await this.token.balanceOf(owner);
-            balanceOfOwner.should.be.bignumber.equal(0);
+            balanceOfOwner.toString().should.equal('0');
             let lockedBalance = await this.token.balanceOf(this.timelock_contract.address);
-            lockedBalance.should.be.bignumber.equal(_totalSupply * 80 / 100);
+            lockedBalance.toString().should.equal(`${_totalSupply * 80 / 100}`);
         });
-
 
         it('Owner tries to release coins and it fails, since its before releaseTime', async function () {
             await expectThrow(this.timelock_contract.release())
@@ -71,19 +69,19 @@ contract('FABToken', async (accounts) => {
             await increaseTime(30)
             await this.timelock_contract.release()
             let balanceOfOwner = await this.token.balanceOf(owner);
-            balanceOfOwner.should.be.bignumber.equal(_totalSupply * 80 / 100);
+            balanceOfOwner.toString().should.equal(`${_totalSupply * 80 / 100}`);
             let lockedBalance = await this.token.balanceOf(this.timelock_contract.address);
-            lockedBalance.should.be.bignumber.equal(0);
+            lockedBalance.toString().should.equal('0');
         });
 
         it('Balance of customer 1 should be 100', async function () {
             const balance = await this.token.balanceOf(fabCustomer1);
-            balance.should.be.bignumber.equal(100);
+            balance.toString().should.equal('100');
         });
 
         it('Balance of customer 2 should be 0', async function () {
             const balance = await this.token.balanceOf(fabCustomer2);
-            balance.should.be.bignumber.equal(0);
+            balance.toString().should.equal('0');
         });
 
         it('Owner transfer 100 to customer 1', async function () {
@@ -92,13 +90,13 @@ contract('FABToken', async (accounts) => {
 
         it('Balance of customer 1 should be 200', async function () {
             const balance = await this.token.balanceOf(fabCustomer1);
-            balance.should.be.bignumber.equal(200);
+            balance.toString().should.equal('200');
         });
 
         it('Balance of owner should be 44 billion - 100', async function () {
             const balance = await this.token.balanceOf(owner);
             let x = _totalSupply * 80 / 100 - 100;
-            balance.should.be.bignumber.equal(x);
+            balance.toString().should.equal(`${x}`);
         });
         
         it('Customer 1 tries to transfer more token than his balance to customer 2, he fails to do so', async function () {

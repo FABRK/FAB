@@ -1,9 +1,7 @@
-pragma solidity 0.4.25;
+pragma solidity 0.5.8;
 
-import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/BasicToken.sol";
-
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 /**
  * @title ERC20 Token for the FAB Tokensale.
@@ -11,17 +9,17 @@ import "openzeppelin-solidity/contracts/token/ERC20/BasicToken.sol";
  * Contains additional logic to register FAB addresses
  * and claim tokens for the FAB Mainnet swap.
  */
-contract FABToken is StandardToken, DetailedERC20{
+contract FABToken is ERC20, ERC20Detailed{
   mapping(address => string) public keys;
   event LogRegister(address user, string key);
   event LogClaim(address indexed claimer, string fabAddress, uint256 tokenCount);
 
-  constructor(string _name, string _symbol, uint8 _decimals)
-    DetailedERC20(_name, _symbol, _decimals)
+  constructor(string memory _name, string memory _symbol, uint8 _decimals)
+    ERC20Detailed(_name, _symbol, _decimals)
+    ERC20()
     public
   {
-    totalSupply_ = 55000000000;
-    balances[msg.sender] = totalSupply_;
-    emit Transfer(address(0), msg.sender, totalSupply_);
+    _mint(msg.sender, 55000000000);
+    emit Transfer(address(0), msg.sender, 55000000000);
   }
 }
