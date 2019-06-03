@@ -2,7 +2,7 @@ const { increaseTime, expectThrow, latestTime } = require('./util');
 
 const BigNumber = web3.BigNumber;
 const FABToken = artifacts.require('FABToken');
-const FABTokenTimelock = artifacts.require('FABTokenTimelock')
+const FABTokenTimelock = artifacts.require('TokenTimelock.sol')
 
 require('chai')
     .use(require('chai-bignumber')(BigNumber))
