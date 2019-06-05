@@ -3,14 +3,14 @@ ERC-20 Token (FAB)
 
 Install:
 
-    npm install -g truffle@5.0.20
-    npm install -g ganache-cli@6.4.3
+    npm i -g truffle@5.0.20
+    npm i -g ganache-cli@6.4.3
 
 Steps to run:
 
     Open terminal , run "ganache-cli"
     Open another terminal, cd <fab directory>
-    npm install
+    npm i
     truffle compile
     truffle test
 

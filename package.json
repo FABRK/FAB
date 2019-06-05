@@ -1,7 +1,7 @@
 {
-  "name": "ico-fab",
+  "name": "ieo-fab",
   "version": "1.0.0",
-  "description": "FAB ICO",
+  "description": "FAB IEO",
   "main": "truffle.js",
   "directories": {
     "test": "test"
