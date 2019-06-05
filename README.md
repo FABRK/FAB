@@ -38,3 +38,4 @@ Steps to deploy to Rinkeby testnet or Mainnet starting with a stock Ubuntu 18.04
     You will need to have some ETH in your mainnet address to deploy the contract
     To get testnet ETH totest on Rinkeby, please use faucet.rinkeby.io and request funds by following their instructions
     run truffle migrate --network=rinkeby to deploy the contract onto the test network
+    run truffle migrate --network=mainnet when you are ready to deploy onto the main network
