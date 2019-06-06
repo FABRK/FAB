@@ -25,8 +25,8 @@ const fs = require('fs');
 const tnMnemonic = fs.readFileSync(".testnet_secret").toString().trim();
 const mnMnemonic = fs.readFileSync(".mainnet_secret").toString().trim();
 
-var mainNetProvider = new HDWalletProvider(mnMnemonic, "https://mainnet.infura.io/v3/<add infura id>");
-var rinkebyProvider = new HDWalletProvider(tnMnemonic, "https://rinkeby.infura.io/v3/<add infura id>");
+var mainNetProvider = new HDWalletProvider(mnMnemonic, "https://mainnet.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e");
+var rinkebyProvider = new HDWalletProvider(tnMnemonic, "https://rinkeby.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e");
 
 module.exports = {
   /**
