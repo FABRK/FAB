@@ -15,7 +15,6 @@ contract FABToken is ERC20, ERC20Detailed{
     ERC20()
     public
   {
-    _mint(msg.sender, 55000000000);
-    emit Transfer(address(0), msg.sender, 55000000000);
+    _mint(msg.sender, 55000000000000000000000000000);
   }
 }
