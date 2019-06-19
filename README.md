@@ -49,7 +49,7 @@ Steps to deploy just timelock contract:
     Open migrations/2_my_first_token_migration.js
     There should be 3 sections, one to deploy both the ERC20 token and the Timelock contract, one to deploy just the ERC20 
     and the last one to deploy just the Timelock contract.
-    Uncomment the section for just the timelocl contract.
+    Uncomment the section for just the timelock contract (fill in the ERC20 token address where it says <erc 20 address>)
 
     In terminal: 
 
