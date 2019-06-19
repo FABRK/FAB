@@ -1,5 +1,6 @@
 node_modules
 test-output
 build
-.mainnet_secret
 .testnet_secret
+.mainnet_secret
+.private_key
