@@ -13,9 +13,9 @@ module.exports = function (deployer, networks, accounts) {
     // })
 
     // To deploy both erc20 token and time lock contract
-    deployer.deploy(FABToken, "FAB Token", "FAB", 18).then(function () {
-        return ethGetBlock('latest').then(function (block) {
-            return deployer.deploy(TokenTimelock, FABToken.address, accounts[0], block.timestamp + 30 * 30 * 24 * 180)
-        })
-    })
+    // deployer.deploy(FABToken, "FAB Token", "FAB", 18).then(function () {
+    //     return ethGetBlock('latest').then(function (block) {
+    //         return deployer.deploy(TokenTimelock, FABToken.address, accounts[0], block.timestamp + 30 * 30 * 24 * 180)
+    //     })
+    // })
 }
