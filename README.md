@@ -24,12 +24,11 @@ Steps to deploy to Rinkeby testnet or Mainnet starting with a stock Ubuntu 18.04
     npm install -g truffle@5.0.20
 
     go to github.com/FABRK/FAB, click to download zip, unzip
-    go to github.com/FABRK/myfirsttoken, click to download zip, unzip
 
-    cd to the unzipped FAB (or myfirsttoken, if testing) directory
+    cd to the unzipped FAB directory
     npm i
 
-    add your metamask 12 word seed phrase into the text editor and save as a file with no suffix called .testnet_secret and then another called .mainnet_secret in the top level of FAB or myfirsttoken (don't forget the period in front of the filename)
+    add your metamask 12 word seed phrase into the text editor and save as a file with no suffix called .testnet_secret and then another called .mainnet_secret in the top level of FAB (don't forget the period in front of the filename)
 
     In terminal:
     
@@ -46,7 +45,7 @@ Steps to deploy to Rinkeby testnet or Mainnet starting with a stock Ubuntu 18.04
 
 Steps to deploy just timelock contract:
 
-    Open migrations/2_my_first_token_migration.js
+    Open migrations/fab_token_migration.js
     There should be 3 sections, one to deploy both the ERC20 token and the Timelock contract, one to deploy just the ERC20 
     and the last one to deploy just the Timelock contract.
     Uncomment the section for just the timelock contract (fill in the ERC20 token address where it says <erc 20 address>)
@@ -60,7 +59,7 @@ Steps to deploy just timelock contract:
 
 Steps to test offline signing and token transfer to the timelock contract.
 
-    Copy and paste your private key into .private_key in the main folder (myfirsttoken or FAB)
+    Copy and paste your private key into .private_key in the main folder
     Open scripts/offline_signing_and_token_transfer.js
     Update the lines in the MODIFICATION_SECTION with the right information
 
