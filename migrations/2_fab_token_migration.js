@@ -9,7 +9,7 @@ module.exports = function (deployer, networks, accounts) {
 
     // To deploy just time lock contract
     return ethGetBlock('latest').then(function (block) {
-        return deployer.deploy(TokenTimelock, '0xB688f7278004D6596a6Cb1a77F5aF602C8530521', accounts[0], block.timestamp + 30)
+        return deployer.deploy(TokenTimelock, '0x12683dc9eec95a5f742d40206e73319e6b9d8a91', '0x7d2E9a870b992A4D7409d1fcD1B1c5B7b7dc836F', block.timestamp + 15552000)
     })
 
     // To deploy both erc20 token and time lock contract
