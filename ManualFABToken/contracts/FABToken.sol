@@ -242,6 +242,7 @@ contract ManualToken is Manager, ERC20Base {
   }
 
   function _transfer(address _from, address _to, uint256 _value) tokenLock internal returns (bool success) {
+    require(_to != 0x0);
     require(balanceOf[_from] >= _value);
     if (balanceOf[_to].add(_value) <= balanceOf[_to]) {
       revert();
