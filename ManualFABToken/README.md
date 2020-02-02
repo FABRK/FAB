@@ -6,6 +6,8 @@ Manual FAB Token - ERC-20 Token (FAB)
     
     truffle compile
 
+    new termina; ganache-cli
+    
     truffle migrate 
 
     truffle test
