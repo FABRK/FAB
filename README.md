@@ -67,7 +67,7 @@ Steps to test offline signing and token transfer to the timelock contract.
 
     In terminal:
 
-    node scripts/offline_signing_and_token_transfer.js 
+    node scripts/offline_signing_anda_token_transfer.js 
 
     If everything looks good, uncomment line 53 (web3.eth.sendSigned....)
 
