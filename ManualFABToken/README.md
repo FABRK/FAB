@@ -20,7 +20,7 @@ If you don't have any, get some rinkeby eth for your account at: https://faucet.
 If you don't have any, get some eth for your account (0.02 should be enough).
 
 ## Run test suite locally
-Start ganache
+Start ganache (free local ethereum)
 
     docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest
 
