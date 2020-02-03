@@ -4,3 +4,6 @@ build
 .testnet_secret
 .mainnet_secret
 .private_key
+ManualFABToken/.testnet_secret
+ManualFABToken/.mainnet_secret
+ManualFABToken/.private_key

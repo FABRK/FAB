@@ -33,7 +33,8 @@
     "openzeppelin-solidity": "^2.3.0",
     "solidity-coverage": "^0.5.4",
     "solium": "^1.1.7",
-    "solc": "^0.5.8",
+    "truffle-hdwallet-provider": "^1.0.10",
+    "solc": "^0.4.24",
     "web3-utils": "^1.0.0-beta.34"
   },
   "dependencies": {
