@@ -10,6 +10,7 @@ On a fresh ubuntu 18.04 (online):
 
     docker --version
 
+    sudo apt install git
     git clone https://github.com/FABRK/FAB.git
 
     cd FAB

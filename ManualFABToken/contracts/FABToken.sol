@@ -6,10 +6,7 @@ pragma solidity ^0.4.24;
 contract Manager {
   address public owner;
   address public newOwner;
-  address public manager;
-  address public newManager;
   event TransferOwnership(address oldaddr, address newaddr);
-  event TransferManager(address oldaddr, address newaddr);
 
   modifier onlyOwner() {
     require (msg.sender == owner);
@@ -17,23 +14,12 @@ contract Manager {
     _;
   }
 
-  modifier onlyAdmin() {
-    require (msg.sender == owner || msg.sender == manager);
-	// GS: Added yield below
-    _;
-  }
-
   constructor() public {
     owner = msg.sender;
-    manager = msg.sender;
   }
 
   function transferOwnership(address _newOwner) onlyOwner public {
     newOwner = _newOwner;
-  }
-
-  function transferManager(address _newManager) onlyOwner public {
-    newManager = _newManager;
   }
 
   function acceptOwnership() public {
@@ -44,13 +30,6 @@ contract Manager {
     emit TransferOwnership(oldaddr, owner);
   }
 
-  function acceptManager() public {
-    require(msg.sender == newManager);
-    address oldaddr = manager;
-    manager = newManager;
-    newManager = address(0);
-    emit TransferManager(oldaddr, manager);
-  }
 }
 
 library SafeMath {
@@ -228,11 +207,11 @@ contract ManualToken is Manager, ERC20Base {
     isTokenLocked = _lock;
   }
 
-  function setUseFreeze(bool _useOrNot) onlyAdmin public {
+  function setUseFreeze(bool _useOrNot) onlyOwner public {
     isUseFreeze = _useOrNot;
   }
 
-  function freezeAmount(address target, uint256 amountFreeze) onlyAdmin public {
+  function freezeAmount(address target, uint256 amountFreeze) onlyOwner public {
     frozenAccount[target].amount = amountFreeze;
     emit FrozenFunds(target, amountFreeze);
   }
