@@ -3,7 +3,10 @@ Manual FAB Token - ERC-20 Token (FAB)
 
 On a fresh ubuntu 18.04 (online):
 
-    sudo apt-get update -y && apt install docker.io && systemctl start docker && systemctl enable docker
+    sudo apt-get update -y
+    sudo apt install docker.io
+    sudo systemctl start docker
+    sudo systemctl enable docker
 
     docker --version
 
