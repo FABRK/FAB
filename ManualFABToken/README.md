@@ -22,16 +22,16 @@ If you don't have any, get some eth for your account (0.02 should be enough).
 ## Run test suite locally
 Start ganache (free local ethereum)
 
-    docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest
+    sudo docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest
 
 Open a new terminal, run
 
-    docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate && truffle test
+    sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate && truffle test
 
 ## Migrate to Rinkeby testnet
-    docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=rinkeby
+    sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=rinkeby
 
 ## Migrate to Ethereum mainnet
-    docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=mainnet
+    sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=mainnet
 
 Write down the Token contract address, Migration contract address and the address of the owner ("account"). Feel free to copy the entire output. Before closing the terminal shell, search the token contract address at etherscan and verify that it exists and that the number of coins is correct. You can verify the Rinkeby migration by searching the token contract address at https://rinkeby.etherscan.io/. When the migrations are complete, 55B FAB should be sitting in owner address (belonging to the mnemonic in .testnet_secret/.mainnet_secret files).
