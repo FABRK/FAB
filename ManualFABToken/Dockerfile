@@ -13,4 +13,4 @@ RUN npm install chai
 RUN npm install chai-bignumber
 COPY . .
 CMD truffle compile
-#CMD truffle migrate && truffle test
+#CMD truffle compile && truffle migrate && truffle test
