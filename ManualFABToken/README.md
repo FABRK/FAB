@@ -21,8 +21,11 @@ If you don't have any, get some eth for your account (0.02 should be enough).
 
 ## Run test suite locally
 Start ganache
+
     docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest
+
 Open a new terminal, run
+
     docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate && truffle test
 
 ## Migrate to Rinkeby testnet
