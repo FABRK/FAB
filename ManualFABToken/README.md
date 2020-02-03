@@ -1,14 +1,17 @@
 # FAB
 Manual FAB Token - ERC-20 Token (FAB)
 
-On a fresh ubuntu 18.04 install:
+On a fresh ubuntu 18.04:
 
     sudo apt-get update -y && apt install docker.io && systemctl start docker && systemctl enable docker
 
+    docker --version
+
     git clone https://github.com/FABRK/FAB.git
+
     cd FAB
 
-Create a new account by mnemonic using MyEtherWallet (offline): https://github.com/MyEtherWallet/MyEtherWallet/releases/download/v5.3.0/MyEtherWallet-v5.3.0.zip
+Create a new address by mnemonic using MyEtherWallet (offline): https://github.com/MyEtherWallet/MyEtherWallet/releases/download/v5.3.0/MyEtherWallet-v5.3.0.zip
 
 Open a blank text file and paste in your mnemonic. Save this as .testnet_secret and again as .mainnet_secret
 
