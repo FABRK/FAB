@@ -19,15 +19,15 @@ If you don't have any, get some rinkeby eth for your account at: https://faucet.
 
 If you don't have any, get some eth for your account (0.02 should be enough).
 
-## To run test suite locally
+## Run test suite locally
 Start ganache
     docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest
 Open a new terminal, run
     docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate && truffle test
 
-## To migrate to Rinkeby testnet
+## Migrate to Rinkeby testnet
     docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=rinkeby
 
-## To migrate to Ethereum mainnet
+## Migrate to Ethereum mainnet
     cd FAB
     docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=mainnet
