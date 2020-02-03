@@ -11,13 +11,16 @@ On a fresh ubuntu 18.04 (online):
     docker --version
 
     sudo apt install git
+
+    git --version
+
     git clone https://github.com/FABRK/FAB.git
 
     cd FAB
 
 Create a new address by mnemonic using MyEtherWallet (offline): https://github.com/MyEtherWallet/MyEtherWallet/releases/download/v5.3.0/MyEtherWallet-v5.3.0.zip
 
-Open a blank text file and paste in your mnemonic. Save this as .testnet_secret and again as .mainnet_secret
+Open a blank text file using the standard ubuntu textedit app, and paste in your mnemonic. Save this as .testnet_secret and again as .mainnet_secret in the ManualFABToken directory of this repo (FAB/ManualFABToken).
 
 If you don't have any, get some rinkeby eth for your account at: https://faucet.rinkeby.io/
 
@@ -30,7 +33,7 @@ Start ganache (free local ethereum)
 
 Open a new terminal, run
 
-    sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate && truffle test
+    sudo docker build -t token ManualFABToken && docker run --network="host" token /bin/bash -c "truffle migrate && truffle test"
 
 ## Migrate to Rinkeby testnet
     sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=rinkeby
