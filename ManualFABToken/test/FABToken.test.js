@@ -28,10 +28,10 @@ contract('ManualToken', async (accounts) => {
             await this.token.transfer(fabCustomer3, web3.utils.toWei((_totalSupply * 20 / 100).toString(), 'ether'))
         });
         
-        it('Owner lock contrct', async function () {
+        it('Owner lock contract', async function () {
             await this.token.setLockToken(true)
         });
-        
+
         it('owner address owning Fab and Owner try to transfer tokens and it should fail', async function () {
             await expectThrow(this.token.transfer(fabCustomer1, web3.utils.toWei((_totalSupply * 20 / 100).toString(), 'ether')))
         });
@@ -39,11 +39,11 @@ contract('ManualToken', async (accounts) => {
         it('address 1 owning Fab and Owner try to transfer tokens and it should fail', async function () {
             await expectThrow(this.token.transfer(fabCustomer2, web3.utils.toWei((_totalSupply * 20 / 100).toString(), 'ether'), { from: fabCustomer1 }))
         });
-        
+
         it('address 2 owning Fab and Owner try to transfer tokens and it should fail', async function () {
             await expectThrow(this.token.transfer(fabCustomer3, web3.utils.toWei((_totalSupply * 20 / 100).toString(), 'ether'), { from: fabCustomer2 }))
         });
-                
+
         it('address 3 owning Fab and Owner try to transfer tokens and it should fail', async function () {
             await expectThrow(this.token.transfer(owner, web3.utils.toWei((_totalSupply * 20 / 100).toString(), 'ether'), { from: fabCustomer3 }))
         });
@@ -109,11 +109,11 @@ contract('ManualToken', async (accounts) => {
         it('Owner sets isUseFreeze to false', async function () {
             await this.token.setUseFreeze(false)
         });
-      
+
         it('address 3 tries to transfer rest of his balance to someone else and succeeds', async function () {
             let balance = _totalSupply * 6 / 100;
             await this.token.transfer(owner, web3.utils.toWei((balance).toString(), 'ether'), { from: fabCustomer3 })
         });
-       
+
     });
 });

@@ -33,12 +33,15 @@ Start ganache (free local ethereum)
 
 Open a new terminal, run
 
-    sudo docker build -t token ManualFABToken && docker run --network="host" token /bin/bash -c "truffle migrate && truffle test"
+    sudo docker build -t token ManualFABToken && docker run --network="host" -v /Users/jim/FAB/ManualFABToken/shared:/usr/src/app/shared token /bin/bash -c "truffle migrate && truffle test"
 
 ## Migrate to Rinkeby testnet
-    sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=rinkeby
+    sudo docker build -t token ManualFABToken && docker run -v /Users/jim/FAB/ManualFABToken/shared:/usr/src/app/shared token truffle migrate --network=rinkeby
 
 ## Migrate to Ethereum mainnet
     sudo docker build -t token ManualFABToken && docker run --network="host" -it token truffle migrate --network=mainnet
 
 Write down the Token contract address, Migration contract address and the address of the owner ("account"). Feel free to copy the entire output. Before closing the terminal shell, search the token contract address at etherscan and verify that it exists and that the number of coins is correct. You can verify the Rinkeby migration by searching the token contract address at https://rinkeby.etherscan.io/. When the migrations are complete, 55B FAB should be sitting in owner address (belonging to the mnemonic in .testnet_secret/.mainnet_secret files).
+
+## Execute airdrop script
+    docker build -t token ManualFABToken && docker run --network="host" -v /Users/jim/FAB/ManualFABToken/shared:/usr/src/app/shared token node scripts/csv_allocation.js 0x4eC7Dd9e86aa752B12Ba07B50220B8dD1Dfc2cf8 3

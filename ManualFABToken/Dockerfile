@@ -11,6 +11,9 @@ RUN npm install truffle-hdwallet-provider
 RUN npm i
 RUN npm install chai
 RUN npm install chai-bignumber
+RUN npm install fast-csv
+RUN npm install big-number
+RUN npm install @truffle/contract
 COPY . .
 CMD truffle compile
 #CMD truffle compile && truffle migrate && truffle test
