@@ -3,16 +3,27 @@ var Web3 = require("web3");
 const { EthHdWallet } = require("eth-hd-wallet");
 const Tx = require("ethereumjs-tx");
 const { program } = require("commander");
+const delay = require("delay");
 
 /**
  * Variables used in the script
  * Modify these variables as required
  */
-const FILE_NAME = "test_addresses.txt";
+const FILE_NAME = "addresses.txt";
 const OWNER_ADDRESS = "0xADd1D5f952f54887A8D860943B1F17b420044A7C".toLowerCase();
 const TOKEN_CONTRACT_ADDRESS = "0x686AF6a41e9038d7F7aF1Feae63564249bd595dd".toLowerCase();
-const MNEMONIC_WORDS_FILE=".testnet_secret"
-const CHAIN_ID = 5777;
+const MNEMONIC_WORDS_FILE = ".testnet_secret";
+
+/**
+ * Local ganache provider
+ *
+ * REPLACE THIS with mainnet provider
+ */
+// const PROVIDER = new Web3.providers.HttpProvider("http://localhost:7545");
+const PROVIDER = new Web3.providers.HttpProvider(
+  "infuraURL"
+);
+const CHAIN_ID = 5;
 
 /**
  * HD wallet used to test token sending functionality of the addresses
@@ -36,13 +47,6 @@ wallet.generateAddresses(6);
 var rawData = fs.readFileSync("build/contracts/ManualToken.json");
 const ERC20_ABI_JSON = JSON.parse(rawData);
 const ERC20_ABI = ERC20_ABI_JSON["abi"];
-
-/**
- * Local ganache provider
- *
- * REPLACE THIS with mainnet provider
- */
-const PROVIDER = new Web3.providers.HttpProvider("http://localhost:7545");
 
 /**
  * Initialize the contract
@@ -129,13 +133,14 @@ const submitFreezeTransaction = async function (address, tokenAmount) {
 };
 
 const setup = async function () {
-  console.log("\nsending tokens to addresses from the file\n");
+  // console.log("\nsending tokens to addresses from the file\n");
   const addresses = await getAddresses();
 
   for (const addr of addresses) {
     await submitTransferTransaction(OWNER_ADDRESS, addr.address, addr.amount);
     console.log("Transferred", addr.address, addr.amount);
   }
+  await delay(2000);
   console.log("\nToken transfer complete!\n");
   console.log("\nVerifying the balance of the transferred addresses\n");
   for (const addr of addresses) {
@@ -150,6 +155,7 @@ const setup = async function () {
     }
     console.log("\n");
   }
+  await delay(2000);
   console.log(
     "\nTransferring 10% balance back to the owner to test the receive and send functionality before freeze\n"
   );
@@ -161,6 +167,7 @@ const setup = async function () {
     );
     console.log("Transferred from", addr.address, addr.amount * 0.1);
   }
+  await delay(2000);
   console.log("\nTransfer from address to owner complete!\n");
   console.log("\nVerifying the reduced balance of the transferred addresses\n");
   for (const addr of addresses) {
@@ -187,6 +194,7 @@ const setup = async function () {
     console.log("Transferred", addr.address, addr.amount * 0.1);
   }
   console.log("\n** Balance refill complete - verifying **\n");
+  await delay(2000);
 
   for (const addr of addresses) {
     console.log(addr.address);
@@ -237,10 +245,6 @@ const testFreeze = async function () {
   }
 };
 
-//
-//
-//
-
 program
   .option("-s, --setup", "setup and execute test cases to verify the script")
   .option("-f, --freeze", "execute freeze on addresses")
@@ -250,11 +254,9 @@ program.parse(process.argv);
 
 if (program.setup) {
   setup();
-}
-if (program.freeze) {
+} else if (program.freeze) {
   freeze();
-}
-if (program.testFreeze) {
+} else if (program.testFreeze) {
   testFreeze();
 } else {
   console.log("run script with option -h for help");
