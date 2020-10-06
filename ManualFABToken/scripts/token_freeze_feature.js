@@ -115,7 +115,7 @@ const submitFreezeTransaction = async function (address, tokenAmount) {
   var rawTransaction = {
     from: OWNER_ADDRESS,
     nonce: web3.utils.toHex(nonce),
-    gasPrice: web3.utils.toHex(20 * 1e9),
+    gasPrice: web3.utils.toHex(60 * 1e9),
     gasLimit: web3.utils.toHex(210000),
     to: TOKEN_CONTRACT_ADDRESS,
     value: 0,
