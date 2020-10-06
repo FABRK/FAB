@@ -21,7 +21,7 @@ const MNEMONIC_WORDS_FILE = ".testnet_secret";
  */
 // const PROVIDER = new Web3.providers.HttpProvider("http://localhost:7545");
 const PROVIDER = new Web3.providers.HttpProvider(
-  "infuraURL"
+  "https://goerli.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e"
 );
 const CHAIN_ID = 5;
 
@@ -86,10 +86,11 @@ const getBalance = async function (address) {
 
 const submitTransferTransaction = async function (from, To, tokenAmount) {
   const nonce = await web3.eth.getTransactionCount(from);
+  console.log("\nGot tx count of owner address\n");
   var rawTransaction = {
     from: from,
     nonce: web3.utils.toHex(nonce),
-    gasPrice: web3.utils.toHex(20 * 1e9),
+    gasPrice: web3.utils.toHex(60 * 1e9),
     gasLimit: web3.utils.toHex(210000),
     to: TOKEN_CONTRACT_ADDRESS,
     value: 0,
@@ -110,6 +111,7 @@ const submitTransferTransaction = async function (from, To, tokenAmount) {
 
 const submitFreezeTransaction = async function (address, tokenAmount) {
   const nonce = await web3.eth.getTransactionCount(OWNER_ADDRESS);
+  console.log("\nGot tx count of owner address\n");
   var rawTransaction = {
     from: OWNER_ADDRESS,
     nonce: web3.utils.toHex(nonce),
@@ -122,13 +124,14 @@ const submitFreezeTransaction = async function (address, tokenAmount) {
       .encodeABI(),
     chainId: web3.utils.toHex(CHAIN_ID),
   };
-
+  console.log("\nCreated raw tx object\n");
   const privateKey = wallet.getPrivateKey(OWNER_ADDRESS);
 
   var tx = new Tx(rawTransaction);
   tx.sign(privateKey);
+  console.log("\nSigned raw tx object\n");
   const serializedTx = `0x${tx.serialize().toString("hex")}`;
-
+  console.log("\nawaiting sendSignedTransaction\n");
   await web3.eth.sendSignedTransaction(serializedTx);
 };
 
@@ -217,6 +220,7 @@ const freeze = async function () {
   console.log("\nFreezing the addresses and amount as per the file\n");
   const addresses = await getAddresses();
   for (const addr of addresses) {
+    console.log("\nGot addresses, awaiting submitFreezeTransaction\n");
     await submitFreezeTransaction(addr.address, addr.amount);
     console.log("Freezed ", addr.address, addr.amount);
   }
