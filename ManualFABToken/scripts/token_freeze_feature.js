@@ -40,7 +40,6 @@ const wallet = EthHdWallet.fromMnemonic(
   fs.readFileSync(MNEMONIC_WORDS_FILE).toString()
 );
 wallet.generateAddresses(6);
-
 /**
  * Read built contract ABI
  */
