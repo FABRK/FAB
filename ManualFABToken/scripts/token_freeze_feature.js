@@ -10,8 +10,8 @@ const delay = require("delay");
  * Modify these variables as required
  */
 const FILE_NAME = "addresses.txt";
-const OWNER_ADDRESS = "0xADd1D5f952f54887A8D860943B1F17b420044A7C".toLowerCase();
-const TOKEN_CONTRACT_ADDRESS = "0x686AF6a41e9038d7F7aF1Feae63564249bd595dd".toLowerCase();
+const OWNER_ADDRESS = "0x3a3aBdf35C333e6AB31F8cd97491c12c5D3F0aeb".toLowerCase();
+const TOKEN_CONTRACT_ADDRESS = "0xa5b0A9136edAB8Ed04dBE1918C72034B18ba94Af".toLowerCase();
 const MNEMONIC_WORDS_FILE = ".testnet_secret";
 
 /**
