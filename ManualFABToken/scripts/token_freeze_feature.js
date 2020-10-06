@@ -10,8 +10,8 @@ const delay = require("delay");
  * Modify these variables as required
  */
 const FILE_NAME = "addresses.txt";
-const OWNER_ADDRESS = "0x3a3aBdf35C333e6AB31F8cd97491c12c5D3F0aeb".toLowerCase();
-const TOKEN_CONTRACT_ADDRESS = "0xa5b0A9136edAB8Ed04dBE1918C72034B18ba94Af".toLowerCase();
+const OWNER_ADDRESS = "0xf2ce8Ed60DFa32E085b6632B5C095B384187059B".toLowerCase();
+const TOKEN_CONTRACT_ADDRESS = "0x87fa78BDA81444a31a37d9EFD409f79f4a6746e8".toLowerCase();
 const MNEMONIC_WORDS_FILE = ".testnet_secret";
 
 /**
@@ -21,9 +21,9 @@ const MNEMONIC_WORDS_FILE = ".testnet_secret";
  */
 // const PROVIDER = new Web3.providers.HttpProvider("http://localhost:7545");
 const PROVIDER = new Web3.providers.HttpProvider(
-  "https://goerli.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e"
+  "https://rinkeby.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e"
 );
-const CHAIN_ID = 5;
+const CHAIN_ID = 4;
 
 /**
  * HD wallet used to test token sending functionality of the addresses
@@ -86,7 +86,7 @@ const getBalance = async function (address) {
 
 const submitTransferTransaction = async function (from, To, tokenAmount) {
   const nonce = await web3.eth.getTransactionCount(from);
-  console.log("\nGot tx count of owner address\n");
+  console.log("\nsubmitTransferTransaction got tx count of owner address\n");
   var rawTransaction = {
     from: from,
     nonce: web3.utils.toHex(nonce),
@@ -99,19 +99,19 @@ const submitTransferTransaction = async function (from, To, tokenAmount) {
       .encodeABI(),
     chainId: web3.utils.toHex(CHAIN_ID),
   };
-
+  console.log("\nCreated raw tx object\n");
   const privateKey = wallet.getPrivateKey(from);
-
+  console.log("\nSigned raw tx object\n");
   var tx = new Tx(rawTransaction);
   tx.sign(privateKey);
   const serializedTx = `0x${tx.serialize().toString("hex")}`;
-
+  console.log("\nawaiting sendSignedTransaction\n");
   await web3.eth.sendSignedTransaction(serializedTx);
 };
 
 const submitFreezeTransaction = async function (address, tokenAmount) {
   const nonce = await web3.eth.getTransactionCount(OWNER_ADDRESS);
-  console.log("\nGot tx count of owner address\n");
+  console.log("\nsubmitFreezeTransaction got tx count of owner address\n");
   var rawTransaction = {
     from: OWNER_ADDRESS,
     nonce: web3.utils.toHex(nonce),

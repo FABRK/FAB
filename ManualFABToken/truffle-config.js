@@ -31,7 +31,7 @@ var mainNetProvider = new HDWalletProvider(
 );
 var rinkebyProvider = new HDWalletProvider(
   tnMnemonic,
-  "https://rinkeby.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e"
+  "https://rinkeby.infura.io/v3/d5d04a697c0f4bea88e43e388f5bc0a6"
 );
 var goerliProvider = new HDWalletProvider(
   tnMnemonic,
