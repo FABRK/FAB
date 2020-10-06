@@ -21,7 +21,7 @@ const MNEMONIC_WORDS_FILE = ".testnet_secret";
  */
 // const PROVIDER = new Web3.providers.HttpProvider("http://localhost:7545");
 const PROVIDER = new Web3.providers.HttpProvider(
-  "https://rinkeby.infura.io/v3/5716a30f3fe844f8a1726e8f67d79a5e"
+  "https://rinkeby.infura.io/v3/ae15685ce9e64a62bb27826d905eea81"
 );
 const CHAIN_ID = 4;
 
