@@ -1,80 +1,86 @@
-# FAB
-ERC-20 Token (FAB)
+<h1 align="center">
+  	<span>ASMBLE Contracts</span>
+  	<svg width="27" height="27" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" fill="#71c549"><path d="M8.816 1.321c.815-.816 1.941-1.321 3.184-1.321 1.251 0 2.384.512 3.2 1.338 4.056.308 5.687 1.739 7.382 8.486.664.463 1.418 1.436 1.418 3.489 0 1.765-.986 3.991-3.139 4.906-2.348 3.731-5.484 5.781-8.861 5.781-3.377 0-6.513-2.05-8.862-5.781-2.153-.915-3.138-3.141-3.138-4.906 0-2.053.753-3.026 1.417-3.489 1.732-6.779 3.38-8.213 7.399-8.503zm5.584 16.679h-4.8c.004.012.682 1.884 2.4 1.884 1.782 0 2.396-1.872 2.4-1.884zm5.235-11h-3.894c-.807 1.206-2.182 2-3.741 2-1.559 0-2.934-.794-3.741-2h-3.923c-.222.631-.412 1.304-.58 2-.179.746.964.954.917 1.733-.044.722-.76.953-1.421.661-.184-.082-.469-.079-.673.053-1 .651-.893 4.184 1.554 5.012 1 .339 2.579 3.361 4.288.432.591-1.012 2.455-1.126 3.579-.322 1.123-.804 2.988-.69 3.578.322 1.709 2.929 3.288-.093 4.288-.432 2.448-.828 2.554-4.361 1.554-5.012-.235-.152-.531-.115-.672-.053-.661.293-1.36.094-1.374-.629-.016-.818 1.114-.871.89-1.765-.168-.669-.389-1.356-.629-2zm-3.885 2c-1.124 0-2.094.629-2.607 1.546-.373-.116-.744-.174-1.143-.174s-.77.058-1.143.174c-.513-.917-1.483-1.546-2.607-1.546-1.654 0-3 1.346-3 3s1.346 3 3 3c1.231 0 2.285-.748 2.747-1.811.245-.566.394-1.301 1.003-1.301.609 0 .758.735 1.003 1.301.462 1.063 1.516 1.811 2.747 1.811 1.654 0 3-1.346 3-3s-1.346-3-3-3zm0 4.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm-7.5 0c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm3.75-11.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z"/></svg>
+</h1>
 
-Steps to deploy to Rinkeby testnet or Mainnet starting with a stock Ubuntu 18.04 OS:
+---
+
+## Requirements
+
+-   Node.Js version v12.18.0 or higher. See [here](https://nodejs.org/en/download/) for install instructions.
+
+-   Install Truffle
+
+    ```sh
+    npm install -g truffle
+    ```
+
+
+## Core Component
+
+- truffle :- used to compile and test smart contracts
+
+- openzeppelin :- used Sample code from it
+
+
+## Version :- Solidity Version 0.8.0
+
+## Setting Up
+
+-  **Update Your memonic in .env file**
+
+    ```sh
+    MEMONIC=please set you memonic here
+    ```
+
+
+
+## Installation
+
+-   Install all modules
+
+    ```sh
+    yarn
+    ```
     
-    In terminal:
-    sudo apt update
 
-    install chrome from google.com/chrome
-    install metamask from chrome extension store and follow the instructions
-    copy the seed words to a txt file in the text editor, save to desktop, keep open 
-    transfer some ETH into your new account (either the mainnet or rinkeby, or both, there's a dropdown in the upper left)
+## Compile Contracts 
 
-    In terminal:
-    sudo apt install build-essential
-    sudo apt install python
-    sudo apt install git 
-    sudo apt install curl 
-    curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh -o install_nvm.sh 
-    bash install_nvm.sh 
+-   If you want to compile application
 
-    Start new terminal instance, close the existing one
-    nvm install 9.5.0 
-    npm install -g truffle@5.0.20
+    ```sh
+    yarn compile
+    ```
 
-    go to github.com/FABRK/FAB, click to download zip, unzip
 
-    cd to the unzipped FAB directory
-    npm i
+## Test Contracts
 
-    add your metamask 12 word seed phrase into the text editor and save as a file with no suffix called .testnet_secret and then another called .mainnet_secret in the top level of FAB (don't forget the period in front of the filename)
+-   If you want to Test Smart Contracts
 
-    In terminal:
-    
-    truffle compile
+      ```sh
+      yarn test
+      ```
 
-    You will need to have some ETH in your mainnet address to deploy the contract
+-   Test Specific file **OR** Specific contract 
 
-    In terminal:
-    truffle migrate --network=rinkeby (will create tokens on ethereum testnet called rinkeby)
 
-    truffle migrate --network=mainnet (will create the tokens on the live mainnet)
-    
-    write down the Token contract address, Timelock contract address, Migration contract address and the address of the deployer.
+      ```sh
+      yarn test ./test/ASMBLE.Test.js
+      ```
 
-Steps to deploy just timelock contract:
+## Check Code Coverage
 
-    Open migrations/fab_token_migration.js
-    There should be 3 sections, one to deploy both the ERC20 token and the Timelock contract, one to deploy just the ERC20 
-    and the last one to deploy just the Timelock contract.
-    Uncomment the section for just the timelock contract (fill in the ERC20 token address where it says <erc 20 address>)
+-   If you want to check code coverage
 
-    In terminal: 
+      ```sh
+      yarn TestCoverage
+      ```
 
-    truffle compile
-    truffle deploy --network=rinkeby
 
-    This will deploy just the timelock contract. Write down the Address.
+## Devlopment Enviorments 
 
-Steps to test offline signing and token transfer to the timelock contract.
+-   If you want to enter Console developmetn mode
 
-    Copy and paste your private key into .private_key in the main folder
-    Open scripts/offline_signing_and_token_transfer.js
-    Update the lines in the MODIFICATION_SECTION with the right information
-
-    Transfer txn is commented out. So first try a dry run and confirm the information printed out to the screen is correct
-
-    In terminal:
-
-    node scripts/offline_signing_anda_token_transfer.js 
-
-    If everything looks good, uncomment line 53 (web3.eth.sendSigned....)
-
-    In terminal:
-
-    node/scripts/offline_signing_and_token_transfer.js
-
-    This will transfer the token amount you specified to the timelock contract address. Comment this line out.
-
-    If you wish to verify that the balances were updated, you can run the same script again and it will give you the new balances. Please make sure that the sendSignedTransaction line is commented out here.
+    ```sh
+    yarn develop
+    ```
